@@ -2,7 +2,7 @@ name: Daily Appointment Reminder
 
 on:
   schedule:
-    - cron: '0 11 * * *' # 10:00 UTC = 12:00 (Winter) / 13:00 (Summer) Israel Time
+    - cron: '05 11 * * *' # 10:00 UTC = 12:00 (Winter) / 13:00 (Summer) Israel Time
   workflow_dispatch:      # Allows manual trigger for testing
 
 jobs:
