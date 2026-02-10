@@ -2,8 +2,8 @@ name: Daily Appointment Reminder
 
 on:
   schedule:
-    - cron: '0 10 * * *' # 10:00 UTC = 12:00/13:00 Israel
-  workflow_dispatch:      # מאפשר הרצה ידנית
+    - cron: '0 10 * * *' # 10:00 UTC = 12:00 (Winter) / 13:00 (Summer) Israel Time
+  workflow_dispatch:      # Allows manual trigger for testing
 
 jobs:
   run-reminder-bot:
@@ -22,9 +22,9 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Restore Secret Files & Debug
+      - name: Restore Secret Files
         run: |
-          # יצירת הקבצים מהסודות
+          # Create authentication files from GitHub Secrets
           echo '${{ secrets.GCP_CREDENTIALS_JSON }}' > credentials.json
           echo '${{ secrets.GCP_TOKEN_JSON }}' > token.json
           
@@ -44,5 +44,5 @@ jobs:
       - name: Run Automation Script
         env:
           MACRODROID_WEBHOOK_URL: ${{ secrets.MACRODROID_WEBHOOK_URL }}
-        # הוספנו את הדגל -u שמכריח את פייתון להדפיס לוגים מיד
+        # The -u flag forces Python to output logs immediately (unbuffered)
         run: python -u main.py
