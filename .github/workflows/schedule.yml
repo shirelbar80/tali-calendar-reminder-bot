@@ -27,6 +27,19 @@ jobs:
           # Create authentication files from GitHub Secrets
           echo '${{ secrets.GCP_CREDENTIALS_JSON }}' > credentials.json
           echo '${{ secrets.GCP_TOKEN_JSON }}' > token.json
+          
+          # בדיקה האם הקבצים נוצרו והם לא ריקים (בלי להציג את התוכן שלהם)
+          if [ -s token.json ]; then
+            echo "✅ token.json exists and is not empty."
+          else
+            echo "❌ ERROR: token.json is empty! Check your GitHub Secrets."
+          fi
+          
+          if [ -s credentials.json ]; then
+            echo "✅ credentials.json exists and is not empty."
+          else
+            echo "❌ ERROR: credentials.json is empty! Check your GitHub Secrets."
+          fi
 
       - name: Run Automation Script
         env:
