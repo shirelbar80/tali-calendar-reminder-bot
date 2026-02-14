@@ -151,7 +151,7 @@ def main():
             if phone:
                 print(f"    -> MATCH! Found phone: {phone}")
                 # Message content remains in Hebrew for the client
-                message_text = f"היי {summary}, תזכורת לתור שלך מחר בשעה {formatted_time} לתספורת אצלי! נתראה :)"
+                message_text = message_text = f"היי {summary},\nיש לך מחר תור ב {formatted_time}.\nנתראה ברח' העבודה 1 בית מספר 3 רמה\"ש, הכניסה למתחם הבתים מרח' העבודה 1 או מרח' המלאכה 18, אפשר לחנות ברח' המלאכה."
                 try:
                     resp = requests.get(WEBHOOK_URL, params={"phone": phone, "msg": message_text})
                     print(f"    -> Webhook sent! Status: {resp.status_code}")
@@ -167,3 +167,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
